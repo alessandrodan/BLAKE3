@@ -127,6 +127,15 @@ add_library(blake3
 )
 add_library(BLAKE3::blake3 ALIAS blake3)
 
+if(MSVC)
+    target_compile_options(blake3 PRIVATE
+        $<$<CONFIG:Debug>:/MTd>
+        $<$<CONFIG:Release>:/MT>
+        $<$<CONFIG:RelWithDebInfo>:/MT>
+        $<$<CONFIG:MinSizeRel>:/MT>
+    )
+endif()
+
 # library configuration
 set(PKG_CONFIG_CFLAGS)
 if (BUILD_SHARED_LIBS)

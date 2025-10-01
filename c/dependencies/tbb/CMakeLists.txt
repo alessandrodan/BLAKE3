@@ -13,6 +13,13 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
     option(TBB_TEST OFF "")
     option(TBBMALLOC_BUILD OFF "")
 
+    if(MSVC)
+        set(CMAKE_CXX_FLAGS_DEBUG "/MTd" CACHE STRING "C++ compiler flags for Debug" FORCE)
+        set(CMAKE_CXX_FLAGS_RELEASE "/MT" CACHE STRING "C++ compiler flags for Release" FORCE)
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/MT" CACHE STRING "C++ compiler flags for RelWithDebInfo" FORCE)
+        set(CMAKE_CXX_FLAGS_MINSIZEREL "/MT" CACHE STRING "C++ compiler flags for MinSizeRel" FORCE)
+    endif()
+
     mark_as_advanced(TBB_TEST)
     mark_as_advanced(TBBMALLOC_BUILD)
 
